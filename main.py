@@ -8,8 +8,8 @@ from Llms import generate_prompt
 
 
 # 知识文件
-FILES = ['test0.txt', 'test1.md']
-DATABASE_NAME = 'dabase_test'
+FILES = ['test0.txt', 'test1.md', 'maogai.txt']
+DATABASE_NAME = 'database_test'
 
 
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
@@ -43,7 +43,7 @@ def main():
     while True:
         answer = AskAI(database, question)
         print(answer)
-        question = input("还有什么问题吗？")
+        question = input("还有什么问题吗？\n")
 
 
 if __name__ == "__main__":
