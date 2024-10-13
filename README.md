@@ -3,7 +3,7 @@ python >= 3.11
 
 embedding模型使用Huggingface"sentence-transformers/all-MiniLM-L6-v2"
 
-llm使用"Qwen2/qwen2-1.5B"
+llm使用"Qwen/Qwen2.5-1.5B"
 
 chunk算法目前直接按固定长度分块，可以处理.txt,.md文件。
 

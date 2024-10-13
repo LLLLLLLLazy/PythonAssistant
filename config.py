@@ -1,6 +1,6 @@
 # 模型存放的路径
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-LLM_NAME = "Qwen2/qwen2-1.5B"
+LLM_NAME = "Qwen/Qwen2.5-1.5B"
 
 EMBEDDING_MODEL_PATH = "F:\\embedding_model"
 LLM_PATH = "F:\\llm"
