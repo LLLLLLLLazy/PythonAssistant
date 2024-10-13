@@ -1,7 +1,7 @@
 # 手搓版本
 embedding模型使用transformers"sentence-transformers/all-MiniLM-L6-v2"
 
-分词器算法目前直接按固定长度分块，可以处理.txt,.md文件。
+chunk算法目前直接按固定长度分块，可以处理.txt,.md文件。
 
 知识库没用外部库，直接把chunks_vector字典存为json，对小规模文件没有压力。
 
