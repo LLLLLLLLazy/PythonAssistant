@@ -22,6 +22,6 @@ python main.py
 ```
 
 如果环境没问题的话(主要是transformers和torch，用来embedding，第一次运行应该会下载embedding模型，比较久)。
-运行main.py将会在文件夹下建立名为DATABASE_NAME的知识库，然后AI在命令行里循环回答问题。
+运行main.py将会在database文件夹下建立名为DATABASE_NAME的知识库，然后AI在命令行里循环回答问题。
 
 后续看后端怎么处理响应，再改AskAI的过程，主要是和main函数对接，以及优化Chunk和添加命令行管理知识库的功能。。。
