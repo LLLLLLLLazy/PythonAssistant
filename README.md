@@ -7,7 +7,7 @@ embedding模型使用transformers"sentence-transformers/all-MiniLM-L6-v2"
 ## 安装下列依赖
 ```python
 numpy
-transformers
+transfomers
 torch
 ```
 ```bash
