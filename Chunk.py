@@ -1,7 +1,7 @@
 
 
 
-CHUNK_LENGTH = 20
+CHUNK_LENGTH = 50 
 
 
 def chunker(text: str, chunk_length: int=CHUNK_LENGTH) -> list[str]:

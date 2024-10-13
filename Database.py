@@ -18,6 +18,9 @@ class Database():
         self.file_nums = 0
         
         self.db = os.path.join('database', (name + '.json'))
+        
+        with open(self.db, 'w', encoding = 'utf-8') as f:
+            json.dump({}, f, ensure_ascii=False)
 
         self.tokenizer = tokenizer
         self.model = embedding_model
@@ -48,8 +51,13 @@ class Database():
             chunks_vector[chunk] = embedding(self.model, self.tokenizer, chunk)
         
         # 保存到知识库
+        with open(self.db, 'r', encoding = 'utf-8') as f:
+            data = json.load(f)
+        
+        data.update(chunks_vector)
+
         with open(self.db, 'w', encoding = 'utf-8') as f:
-            json.dump(chunks_vector, f, ensure_ascii=False)
+            json.dump(data, f, ensure_ascii=False)
 
         self.files.append(file_name)
         self.file_nums += 1
