@@ -12,9 +12,9 @@ cat requirements.txt
 pip install -r requirements.txt
 ```
 ## 运行
-'''bash
+```bash
 python main.py
-'''
+```
 
 如果环境没问题的话(主要是transformers和torch，用来embedding，第一次运行应该会下载embedding模型，比较久)。
 运行main.py将会在文件夹下建立名为DATABASE_NAME的知识库，然后AI在命令行里循环回答问题。
