@@ -6,7 +6,9 @@ embedding模型使用transformers"sentence-transformers/all-MiniLM-L6-v2"
 
 ## 安装下列依赖
 ```sh
-cat requirements.txt
+numpy
+transfomers
+torch
 ```
 ```bash
 pip install -r requirements.txt
