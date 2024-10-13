@@ -1,11 +1,12 @@
 # 手搓版本
+python > 3.11
 embedding模型使用transformers"sentence-transformers/all-MiniLM-L6-v2"
+llm使用"Qwen2/qwen2-1.5B"
 
 chunk算法目前直接按固定长度分块，可以处理.txt,.md文件。
 
 知识库管理没用外部库，直接把chunks_vector字典存为json，对小规模文件没有压力。
 
-目前llm部分返回处理好的提示词，还没接大模型，可以考虑API，应该比GPU服务器便宜而且效果更好。
 
 ## 安装下列依赖
 ```python
@@ -16,12 +17,40 @@ torch
 ```bash
 pip install -r requirements.txt
 ```
+
+## 安装embedding及llm
+首先将config.py里的EMBEDDING_MODEL_PATH,LLM_PATH更改为存放的文件夹路径。
+再运行download_model.py,会自动从Huggingface下载对应的模型。
+```bash
+python download_model.py
+```
+
+## 更改配置
+```python
+# 模型存放的路径
+EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+LLM_NAME = "Qwen2/qwen2-1.5B"
+
+EMBEDDING_MODEL_PATH = "F:\\embedding_model"
+LLM_PATH = "F:\\llm"
+
+
+# 知识文件
+FILES = ['test0.txt', 'test1.md', 'maogai.txt']
+DATABASE_NAME = 'database_test'
+
+
+# 分块长度
+CHUNK_LENGTH = 50 
+
+# top_k的数量
+K = 3
+```
+FILES更改为data中的文件，DATABASE_NAME改为知识库名称，将在database文件夹下建立.json文件
 ## 运行
+
 ```bash
 python main.py
 ```
 
-如果环境没问题的话(主要是transformers和torch，用来embedding，第一次运行应该会下载embedding模型，比较久)。
-运行main.py将会在database文件夹下建立名为DATABASE_NAME的知识库，然后AI在命令行里循环回答问题。
-
-后续看后端怎么处理响应，再改AskAI的过程，主要是和main函数对接，以及优化Chunk和添加命令行管理知识库的功能。。。
+运行将建立知识库，并在命令行中进入和AI的问答循环。

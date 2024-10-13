@@ -4,12 +4,11 @@ from transformers import AutoTokenizer, AutoModel
 import numpy as np
 
 
+from config import K
 from Chunk import chunker
 from Embedding import embedding
 
 
-
-K = 3
 
 
 class Database():
@@ -98,16 +97,3 @@ class Database():
         top_k = sorted(similarities, key=similarities.get, reverse=True)[:k]
         
         return top_k
-
-
-
-# 测试
-#tokenizer = AutoTokenizer.from_pretrained(EMBEDDING_MODEL_NAME)
-#model = AutoModel.from_pretrained(EMBEDDING_MODEL_NAME)
-#db = Database('dbtest', tokenizer, model)
-#db.add(FILE)
-#print(db.top_k_chunks('条件满足的时候执行语句'))
-
-
-
-

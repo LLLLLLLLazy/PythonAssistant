@@ -1,7 +1,7 @@
 
 
+from config import CHUNK_LENGTH
 
-CHUNK_LENGTH = 50 
 
 
 def chunker(text: str, chunk_length: int=CHUNK_LENGTH) -> list[str]:
@@ -17,12 +17,3 @@ def chunker(text: str, chunk_length: int=CHUNK_LENGTH) -> list[str]:
             break
 
     return chunk_list
-
-
-
-# 测试
-#with open("data/test.text", "r", encoding = 'utf-8') as file:
-#    text = file.read()
-#print(chunker(text))
-
-

@@ -20,6 +20,3 @@ def embedding(model, tokenizer, chunk: str) -> list[float]:
     
     return vector.tolist()
 
-
-
-# embedding("HELLO WORLD")
