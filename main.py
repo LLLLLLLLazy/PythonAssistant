@@ -13,13 +13,14 @@ DATABASE_NAME = 'database_test'
 
 
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL_PATH = "F:\\embedding_model"
 K = 3
 
 
 
 def create_database():
-    tokenizer = AutoTokenizer.from_pretrained(EMBEDDING_MODEL_NAME)
-    embedding_model = AutoModel.from_pretrained(EMBEDDING_MODEL_NAME)
+    tokenizer = AutoTokenizer.from_pretrained(EMBEDDING_MODEL_PATH)
+    embedding_model = AutoModel.from_pretrained(EMBEDDING_MODEL_PATH)
 
     database = Database(DATABASE_NAME, tokenizer, embedding_model)
 
