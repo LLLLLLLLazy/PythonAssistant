@@ -5,7 +5,7 @@ embedding模型使用transformers"sentence-transformers/all-MiniLM-L6-v2"
 目前llm部分返回处理好的提示词，还没接大模型，可以考虑API，应该比GPU服务器便宜而且效果更好。
 
 ## 安装下列依赖
-```sh
+```python
 numpy
 transfomers
 torch
