@@ -5,16 +5,18 @@ embedding模型使用transformers"sentence-transformers/all-MiniLM-L6-v2"
 目前llm部分返回处理好的提示词，还没接大模型，可以考虑API，应该比GPU服务器便宜而且效果更好。
 
 ## 安装下列依赖
-'''sh
-cat requirements.txt
-'''
-'''bash
+```python
+numpy
+transformers
+torch
+```
+```bash
 pip install -r requirements.txt
-'''
+```
 ## 运行
-'''bash
+```bash
 python main.py
-'''
+```
 
 如果环境没问题的话(主要是transformers和torch，用来embedding，第一次运行应该会下载embedding模型，比较久)。
 运行main.py将会在文件夹下建立名为DATABASE_NAME的知识库，然后AI在命令行里循环回答问题。
