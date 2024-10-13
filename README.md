@@ -1,5 +1,4 @@
-# 手搓版本
-python > 3.11
+# 手搓版本(python >= 3.11)
 embedding模型使用transformers"sentence-transformers/all-MiniLM-L6-v2"
 llm使用"Qwen2/qwen2-1.5B"
 
@@ -26,6 +25,7 @@ python download_model.py
 ```
 
 ## 更改配置
+打开config.py
 ```python
 # 模型存放的路径
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
