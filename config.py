@@ -18,7 +18,10 @@ DATABASE_NAME = 'database_test'
 
 
 # 分块长度
-CHUNK_LENGTH = 50 
+CHUNK_LENGTH = 50
+
+# 分块重叠长度
+OVERLAP = 0
 
 # top_k的数量
 K = 3

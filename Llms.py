@@ -3,12 +3,15 @@ import torch
 
 
 def llm(tokenizer, model, question: str, top_k: list[str]) -> str:
-    top_k_str = "\n".join(top_k)
-    prompt = f"""假如你是一个智能课程助手，根据你的知识库已有信息，回答问题，如果根据已有信息无法回答，请回答‘根据知识库的信息无法回答’：
-    问题：{question}
-    已知信息：
-    {top_k_str}"""
-    
+    top_k_str = "".join(top_k)
+    prompt = (
+        "假如你是一个智能课程助手，根据你的知识库已知信息回答问题，如果根据已有信息无法回答，请回答“抱歉，我的知识库没有相关信息。”\n"
+        + "问题：\n"
+        + question + "\n"
+        + "已知信息：\n"
+        + top_k_str
+    )
+    print(prompt)
     # 检查是否有可用的 GPU，否则使用 CPU
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     

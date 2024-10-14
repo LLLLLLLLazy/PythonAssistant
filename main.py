@@ -46,7 +46,7 @@ def init_database(tokenizer, embedding_model):
     return database
 
 
-def AskAI(database, llm_tokenizer, llmodel):
+def ask_ai(database, llm_tokenizer, llmodel):
     question = input("我是AI课程助手，有什么可以帮你？\n")
     while True:
         top_k = database.top_k_chunks(question)
@@ -57,8 +57,10 @@ def AskAI(database, llm_tokenizer, llmodel):
 
 def main():
     embedding_tokenizer, embedding_model, llm_tokenier, llm = init_models()
+    
     database = init_database(embedding_tokenizer, embedding_model)
-    AskAI(database, llm_tokenier, llm)
+    
+    ask_ai(database, llm_tokenier, llm)
 
 
 if __name__ == "__main__":
