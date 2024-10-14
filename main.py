@@ -2,7 +2,7 @@ import os
 from transformers import AutoTokenizer, AutoModel, Qwen2ForCausalLM
 
 
-from config import EMBEDDING_MODEL_PATH, LLM_PATH, FILES_PATH, DATABASE_NAME, K
+from config import EMBEDDING_MODEL_PATH, LLM_PATH, FILES_PATH, DATABASE_NAME
 from Database import Database
 from Llms import llm
 
@@ -43,17 +43,16 @@ def init_database(tokenizer, embedding_model):
             print(f"{file} added to {database.db}.")
     
     print(f"{database.db} initialized.")
-
     return database
 
 
 def AskAI(database, llm_tokenizer, llmodel):
     question = input("我是AI课程助手，有什么可以帮你？\n")
     while True:
-        top_k = database.top_k_chunks(question, k=K)
+        top_k = database.top_k_chunks(question)
         answer = llm(llm_tokenizer, llmodel, question, top_k)
         print(answer)
-        question = input("还有什么问题吗？\n")
+        question = input()
 
 
 def main():

@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModel
 import numpy as np
 
 
-from config import K, DATABASE_PATH
+from config import K, DATABASE_PATH, FILES_PATH
 from Chunk import chunker
 from Embedding import embedding
 
@@ -17,7 +17,6 @@ class Database():
         
         if not os.path.exists(self.db):
             self.files = []
-        
             initial_data = {"files": self.files, "vectors": {}}
             with open(self.db, 'w', encoding = 'utf-8') as f:
                 json.dump(initial_data, f, ensure_ascii=False)
@@ -37,7 +36,7 @@ class Database():
         输出：无
         '''
         
-        file = os.path.join('data', file_name)
+        file = os.path.join(FILES_PATH, file_name)
         
         # 读取文件为str
         with open(file, 'r', encoding = 'utf-8') as f:
