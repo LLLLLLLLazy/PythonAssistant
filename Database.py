@@ -102,12 +102,13 @@ class Database():
         # 读取知识库
         with open(self.db, 'r', encoding = 'utf-8') as f:
             data = json.load(f)
-
+        
         # 计算余弦相似度
-        for chunk, vector in data.items():
-            vector = np.array(vector)
-            similarity = self.cosine_similarity(query_vector, vector)
-            similarities[chunk] = similarity
+        for _file, chunk_vectors in data["vectors"].items():
+            for chunk, vector in chunk_vectors.items():
+                vector = np.array(vector)
+                similarity = self.cosine_similarity(query_vector, vector)
+                similarities[chunk] = similarity
 
         # 获取最相似的k个chunk
         top_k = sorted(similarities, key=similarities.get, reverse=True)[:k]
