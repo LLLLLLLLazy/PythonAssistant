@@ -1,13 +1,14 @@
+import os
 from transformers import AutoTokenizer, AutoModel, Qwen2ForCausalLM
 
 
-from config import EMBEDDING_MODEL_PATH, LLM_PATH, FILES, DATABASE_NAME, K
+from config import EMBEDDING_MODEL_PATH, LLM_PATH, FILES_PATH, DATABASE_NAME, K
 from Database import Database
 from Llms import llm
 
 
 
-def init():
+def init_models():
     print("Loading Embedding Model...")
     tokenizer = AutoTokenizer.from_pretrained(EMBEDDING_MODEL_PATH)
     embedding_model = AutoModel.from_pretrained(EMBEDDING_MODEL_PATH)
@@ -15,16 +16,33 @@ def init():
     print("Loading LLM...")
     llm_tokenizer = AutoTokenizer.from_pretrained(LLM_PATH)
     llm = Qwen2ForCausalLM.from_pretrained(LLM_PATH)
-
+    
+    print("Models loaded.")
     return tokenizer, embedding_model, llm_tokenizer, llm
 
 
-def create_database(tokenizer, embedding_model):
+def init_database(tokenizer, embedding_model):
     database = Database(DATABASE_NAME, tokenizer, embedding_model)
+    
+    FILES = os.listdir(FILES_PATH)
+    files = FILES.copy()
 
-    for file in FILES:
-        database.add(file)
-    print(f"Add ALL files to {database.db}")
+    for file in database.files:
+        if file not in files:
+            files.append(file)
+    
+    for file in files:
+        if file in database.files and file in FILES:
+            print(f"{file} already in {database.db}.")
+            continue
+        elif file in database.files:
+            database.delete(file)
+            print(f"{file} deleted from {database.db}.")
+        else:
+            database.add(file)
+            print(f"{file} added to {database.db}.")
+    
+    print(f"{database.db} initialized.")
 
     return database
 
@@ -39,8 +57,8 @@ def AskAI(database, llm_tokenizer, llmodel):
 
 
 def main():
-    embedding_tokenizer, embedding_model, llm_tokenier, llm = init()
-    database = create_database(embedding_tokenizer, embedding_model)
+    embedding_tokenizer, embedding_model, llm_tokenier, llm = init_models()
+    database = init_database(embedding_tokenizer, embedding_model)
     AskAI(database, llm_tokenier, llm)
 
 

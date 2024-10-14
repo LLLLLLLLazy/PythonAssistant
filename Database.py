@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModel
 import numpy as np
 
 
-from config import K
+from config import K, DATABASE_PATH
 from Chunk import chunker
 from Embedding import embedding
 
@@ -13,14 +13,19 @@ from Embedding import embedding
 
 class Database():
     def __init__(self, name: str, tokenizer, embedding_model)->None:
-        self.files = []
-        self.file_nums = 0
+        self.db = os.path.join(DATABASE_PATH, (name + '.json'))
         
-        self.db = os.path.join('database', (name + '.json'))
+        if not os.path.exists(self.db):
+            self.files = []
         
-        with open(self.db, 'w', encoding = 'utf-8') as f:
-            json.dump({}, f, ensure_ascii=False)
-
+            initial_data = {"files": self.files, "vectors": {}}
+            with open(self.db, 'w', encoding = 'utf-8') as f:
+                json.dump(initial_data, f, ensure_ascii=False)
+        else:
+            with open(self.db, 'r', encoding = 'utf-8') as f:
+                data = json.load(f)
+            self.files = data["files"]
+        
         self.tokenizer = tokenizer
         self.model = embedding_model
 
@@ -31,9 +36,6 @@ class Database():
         输入：文件名
         输出：无
         '''
-        if file_name in self.files:
-            print(f"{file_name} already in {self.db}.")
-            return
         
         file = os.path.join('data', file_name)
         
@@ -53,14 +55,28 @@ class Database():
         with open(self.db, 'r', encoding = 'utf-8') as f:
             data = json.load(f)
         
-        data.update(chunks_vector)
+        data["vectors"][file_name] = chunks_vector
 
+        self.files.append(file_name)
+        data["files"] = self.files
         with open(self.db, 'w', encoding = 'utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
 
-        self.files.append(file_name)
-        self.file_nums += 1
-        print(f"Add file {file_name} to {self.db}.")
+    
+    def delete(self, file_name: str)->None:
+        '''
+        从知识库删除文件
+        输入：文件名
+        输出：无
+        '''
+        with open(self.db, 'r', encoding = 'utf-8') as f:
+            data = json.load(f)
+        
+        data["vectors"].pop(file_name)
+        self.files.remove(file_name)
+        data["files"] = self.files
+        with open(self.db, 'w', encoding = 'utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
 
 
     def cosine_similarity(self, vector1: list[float], vector2: list[float]) -> float:

@@ -1,4 +1,4 @@
-
+import torch
 
 
 def llm(tokenizer, model, question: str, top_k: list[str])->str:
@@ -20,3 +20,50 @@ def llm(tokenizer, model, question: str, top_k: list[str])->str:
     response = generated_text[prompt_length:]
 
     return response
+
+
+
+def llm2(tokenizer, model, question: str, top_k: list[str]) -> str:
+    top_k_str = "\n".join(top_k)
+    prompt = f"""假如你是一个智能课程助手，根据你的知识库已有信息，回答问题，如果根据已有信息无法回答，请回答‘根据知识库的信息无法回答’：
+    问题：{question}
+    已知信息：
+    {top_k_str}"""
+    
+    # 检查是否有可用的 GPU，否则使用 CPU
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    # 将模型移动到设备
+    model.to(device)
+    
+    # 编码输入文本，并将其移动到相同的设备
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
+
+    # 生成文本
+    output = model.generate(**inputs, max_length=200, do_sample=True, top_k=50)
+
+    # 解码生成的文本
+    generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+
+    # 去除 prompt 部分，保留生成的内容
+    if generated_text.startswith(prompt):
+        response = generated_text[len(prompt):].strip()
+    else:
+        response = generated_text.strip()
+
+    return response
+
+# Example usage
+'''from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
+# Load the model and tokenizer
+LLM_PATH = "F:\\llm"
+model = GPT2LMHeadModel.from_pretrained(LLM_PATH)
+tokenizer = GPT2Tokenizer.from_pretrained(LLM_PATH)
+
+# Define the question and top-k information
+question = "What is the capital of France?"
+top_k = ["The capital of France is Paris.", "Paris is the capital of France."]
+response = llm2(tokenizer, model, question, top_k)
+print(response)'''
+

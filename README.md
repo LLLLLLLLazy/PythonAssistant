@@ -30,16 +30,22 @@ python download_model.py
 ## 更改配置
 打开config.py
 ```python
-# 模型存放的路径
+# 模型名称
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-LLM_NAME = "Qwen2/qwen2-1.5B"
+LLM_NAME = "Qwen/Qwen2.5-1.5B"
 
+# 模型存放路径
 EMBEDDING_MODEL_PATH = "F:\\embedding_model"
 LLM_PATH = "F:\\llm"
 
 
-# 知识文件
-FILES = ['test0.txt', 'test1.md', 'maogai.txt']
+# 知识文件存放路径
+FILES_PATH = 'data'
+
+# 知识库存放路径
+DATABASE_PATH = 'database'
+
+# 知识库名称
 DATABASE_NAME = 'database_test'
 
 
@@ -49,11 +55,11 @@ CHUNK_LENGTH = 50
 # top_k的数量
 K = 3
 ```
-`FILES`更改为data中的文件，`DATABASE_NAME`改为知识库名称，将在database文件夹下建立.json文件
+`FILES_PATH`更改为知识文件存放路径，`DATABASE_NAME`改为知识库名称，将在`DATABASE_PATH`下建立DATABASE_NAME.json文件
 ## 运行
 
 ```bash
 python main.py
 ```
 
-运行将建立知识库，并在命令行中进入和AI的问答循环。
+运行将初始化模型和知识库，并在命令行中进入和AI的问答循环。
