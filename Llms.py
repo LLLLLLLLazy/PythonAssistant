@@ -3,13 +3,16 @@ import torch
 
 
 def llm(tokenizer, model, question: str, top_k: list[str]) -> str:
-    top_k_str = "".join(top_k)
+    top_k_str = ""
+    for chunk in top_k:
+        top_k_str += chunk + "\n"
     prompt = (
-        "假如你是一个智能课程助手，根据你的知识库已知信息回答问题，如果根据已有信息无法回答，请回答“抱歉，我的知识库没有相关信息。”\n"
-        + "问题：\n"
-        + question + "\n"
-        + "已知信息：\n"
+        "给出以下信息：\n"
+        + "------------------\n"
         + top_k_str
+        + "------------------\n"
+        + f"根据以上信息，回答问题：{question}\n"
+        + "不要给出和以上信息不相关的答案，如果没有相关信息，请回答“问的个啥呀，回答不了”\n"
     )
     print(prompt)
     # 检查是否有可用的 GPU，否则使用 CPU
