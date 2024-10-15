@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModel
 import numpy as np
 
 
-from config import K, DATABASE_PATH, FILES_PATH
+from config import FILES_PATH, DATABASE_PATH, K, BASELINE
 from Chunk import chunker
 from Embedding import embedding
 
@@ -87,7 +87,7 @@ class Database():
         return np.dot(vector1, vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2))
 
 
-    def top_k_chunks(self, query: str, k: int=K) -> list[str]:
+    def top_k_chunks(self, query: str, k: int=K, baseline: float=BASELINE) -> list[str]:
         '''
         返回与查询最相似的k个chunk
         输入：查询字符串，k
@@ -111,5 +111,10 @@ class Database():
 
         # 获取最相似的k个chunk
         top_k = sorted(similarities, key=similarities.get, reverse=True)[:k]
+
+        # 移除相似度低于BASELINE的chunk
+        for chunk in top_k:
+            if similarities[chunk] < baseline:
+                top_k.remove(chunk)
         
         return top_k

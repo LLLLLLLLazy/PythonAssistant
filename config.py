@@ -25,3 +25,6 @@ OVERLAP = 0
 
 # top_k的数量
 K = 3
+
+# 接受top_k的基线
+BASELINE = 0.5
