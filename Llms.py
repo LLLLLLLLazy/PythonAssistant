@@ -12,7 +12,7 @@ def llm(tokenizer, model, question: str, top_k: list[str]) -> str:
         + top_k_str
         + "------------------\n"
         + f"根据以上信息，回答问题：{question}\n"
-        + "不要给出和以上信息不相关的答案，如果没有相关信息，请回答“问的个啥呀，回答不了”\n"
+        + "不要给出无关的信息，如果没有相关信息，请回答“问的个啥呀，回答不了”\n"
     )
     print(prompt)
     # 检查是否有可用的 GPU，否则使用 CPU
