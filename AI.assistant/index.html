@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body style="background-color: rgb(243,245, 250);">
+    <!-- 左侧菜单 -->
+     <div class="menu">
+      <div class="logo">
+         <img src="images/图标 (3).png" class="avatar">
+      </div>
+      <button id="new-chat" onclick="clearchatcontainer()">
+         <img src="images/图标 (3).png" class="avatar">
+      </button>
+
+     </div>
+
+     <!-- 对话区 -->
+     <div id="chat-container">
+          
+     </div>
+
+    <!-- 内容提示区 -->
+     <div id="cover-chat-container">
+      <div style="font-size: 24px; font-weight: bold; left: 33%; top: 20%; position: absolute;">你好，我是你的课程助手xx</div>
+      <div style="font-size: 15px; margin-top: 24%; margin-left: 20%; font-weight: lighter;">你可以尝试以下示例</div>
+           <div class="input-example">
+            <div id="input-example1">
+               <div style="font-size: 22px; font-weight: bold; margin-left: 7%;margin-top: 7%;">气体动力学</div>
+               <div style="font-size: 15px; margin-top: 8%; margin-left: 3%;">马赫数的概念是什么，它和速度因数有什么区别...</div>
+            </div>
+            <div id="input-example2">
+               <div style="font-size: 22px; font-weight: bold; margin-left: 7%;margin-top: 7%;">高等数学</div>
+               <div style="font-size: 15px; margin-top: 8%; margin-left: 3%;">二重积分计算方法...</div>
+            </div>
+           </div>
+
+     </div>
+
+     <!-- 输入区 -->
+     <div id="input-container">
+        <textarea  id="user-input" placeholder="请输入消息..."></textarea>
+        <button id="send-button">
+         <img src="images/send.png" style="width: 23px; height: 23px; position: absolute; bottom: 20%; left: 20%;">
+        </button>
+
+        <button id="send-file-button">
+         <img src="images/clip.png" style="width: 23px; height: 23px; position: absolute; bottom: 20%; left: 20%;">
+        </button>
+     </div>
+
+     <script src="js/function.js"></script>
+</body>
+</html>
