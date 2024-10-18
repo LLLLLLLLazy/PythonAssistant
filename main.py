@@ -55,12 +55,14 @@ class Runner:
             answer = llm(self.llm_tokenizer, self.llm, question, top_k)
             print(answer)
             question = input()
+    
+    
 
 def main():
-    runner = Runner()
-    runner.init_models()
-    runner.init_database()
-    runner.ask_ai()
+    ai = Runner()
+    ai.init_models()
+    ai.init_database()
+    ai.ask_ai()
 
 if __name__ == "__main__":
     main()
