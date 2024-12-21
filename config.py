@@ -1,11 +1,6 @@
 # 模型名称
-EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-LLM_NAME = "Qwen/Qwen2.5-1.5B"
-
-# 模型存放路径
-EMBEDDING_MODEL_PATH = "F:\\embedding_model"
-LLM_PATH = "F:\\llm"
-
+LLM_NAME = "qwen-plus"
+EMBEDDING_NAME = "text-embedding-v3"
 
 # 知识文件存放路径
 FILES_PATH = 'data'
@@ -24,7 +19,7 @@ CHUNK_LENGTH = 50
 OVERLAP = 0
 
 # top_k的数量
-K = 3
+K = 5
 
 # 接受top_k的基线
 BASELINE = 0.5

@@ -1,43 +1,33 @@
 # 手搓版本
 python >= 3.11
 
-embedding模型使用Huggingface"sentence-transformers/all-MiniLM-L6-v2"
+模型通过API调用
 
-llm使用"Qwen/Qwen2.5-1.5B"
+embedding模型使用"text-embedding-v3"
 
-chunk算法目前直接按固定长度分块，可以处理.txt,.md文件。
+llm使用"qwen-plus"
 
-知识库管理没用外部库，直接把`chunks_vector`字典存为json，对小规模文件没有压力。
+chunk算法目前直接按固定长度分块（块与块间有一定重叠），可以处理txt、md文件。
+
+知识库没用向量数据库，直接把`chunks_vector`字典存为json，对小规模文件没有压力。
 
 
 ## 安装下列依赖
 ```python
 numpy
-transfomers
-torch
+openai
 ```
 ```bash
 pip install -r requirements.txt
 ```
 
-## 安装embedding及llm
-首先将config.py里的`EMBEDDING_MODEL_PATH`,`LLM_PATH`更改为存放的文件夹路径。
-再运行download_model.py,会自动从Huggingface下载对应的模型。
-```bash
-python download_model.py
-```
 
-## 更改配置
+## 配置
 打开config.py
 ```python
 # 模型名称
-EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-LLM_NAME = "Qwen/Qwen2.5-1.5B"
-
-# 模型存放路径
-EMBEDDING_MODEL_PATH = "F:\\embedding_model"
-LLM_PATH = "F:\\llm"
-
+LLM_NAME = "qwen-plus"
+EMBEDDING_NAME = "text-embedding-v3"
 
 # 知识文件存放路径
 FILES_PATH = 'data'
@@ -50,16 +40,28 @@ DATABASE_NAME = 'database_test'
 
 
 # 分块长度
-CHUNK_LENGTH = 50 
+CHUNK_LENGTH = 50
+
+# 分块重叠长度
+OVERLAP = 0
 
 # top_k的数量
-K = 3
-```
-`FILES_PATH`更改为知识文件存放路径，`DATABASE_NAME`改为知识库名称，将在`DATABASE_PATH`下建立DATABASE_NAME.json文件
-## 运行
+K = 5
 
+# 接受top_k的基线
+BASELINE = 0.5
+```
+
+
+## 建立知识库
 ```bash
-python main.py
+python database.py
 ```
+将`FILES_PATH`下的源文件转换为向量存放在`DATABASE_PATH`，可以增删文件，动态建立知识库。
 
-运行将初始化模型和知识库，并在命令行中进入和AI的问答循环。
+
+## 运行
+```bash
+python ai.py
+```
+在命令行中进入和AI的问答循环。
