@@ -8,7 +8,7 @@ def convert_files_to_markdown(file_list):
     for file in file_list:
         result = md.convert(file)
         results.append(result.text_content)
-    print("Converted files to markdown")
+        print(f"Converted {file} to markdown")
     return results
 
 def cleaning():
