@@ -5,7 +5,7 @@ python >= 3.11
 
 embedding模型使用"text-embedding-v3"
 
-llm使用"qwen-plus"
+llm使用"deepseek-r1"
 
 chunk算法目前直接按固定长度分块（块与块间有一定重叠），可以处理txt、md文件。
 
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 打开config.py
 ```python
 # 模型名称
-LLM_NAME = "qwen-plus"
+LLM_NAME = "deepseek-r1"
 EMBEDDING_NAME = "text-embedding-v3"
 
 # 知识文件存放路径
