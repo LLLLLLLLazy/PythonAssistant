@@ -1,5 +1,5 @@
 # 模型名称
-LLM_NAME = "qwen-plus"
+LLM_NAME = "deepseek-reasoner"
 EMBEDDING_NAME = "text-embedding-v3"
 
 # 知识文件存放路径

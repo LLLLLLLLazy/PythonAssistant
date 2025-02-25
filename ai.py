@@ -16,8 +16,8 @@ class AI():
             }
         ]
         self.client = OpenAI(
-                api_key="sk-2345ecb2afae4811abbe33775a3e8e87",
-                base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+                api_key="sk-28053374a8a74d44807e9c7743ab92ee",
+                base_url="https://api.deepseek.com",
             )
     
     def llm(self, prompt: str) -> str:
@@ -25,7 +25,7 @@ class AI():
         self.messages.append({"role": "user", "content": prompt})
     
         # 调用大模型生成回复信息
-        completion = self.client.chat.completions.create(model=LLM_NAME, messages=self.messages)
+        completion = self.client.chat.completions.create(model=LLM_NAME, messages=self.messages, stream=False)
         response = completion.choices[0].message.content
     
         # 将大模型的回复信息添加到messages列表中
